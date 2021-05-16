@@ -32,8 +32,7 @@ def main():
     print('Страниц с объявлениями', real_total_pages)
     
     real_total_ads = 0
-    # for i in range(1, real_total_pages + 1):
-    for i in range(1, 2):
+    for i in range(1, real_total_pages + 1):
         time.sleep(random.randint(5, 15))
         url_gen = base_url + str(i)
         html = get_html(url_gen)
