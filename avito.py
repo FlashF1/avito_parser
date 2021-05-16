@@ -24,20 +24,22 @@ def get_page_data(html):
 
 
 def main():
-    # url = 'https://www.avito.ru/moskva/tovary_dlya_kompyutera/komplektuyuschie/videokarty-ASgBAgICAkTGB~pm7gmmZw?q=rtx'
-    url = str(input('Введите ссылку - результат после поиска искомого товара: '))
-    base_url = url + '&p='
+    url = 'https://www.avito.ru/moskva/tovary_dlya_kompyutera/komplektuyuschie/videokarty-ASgBAgICAkTGB~pm7gmmZw?q=rtx'
+    base_url = 'https://www.avito.ru/moskva/tovary_dlya_kompyutera/komplektuyuschie/videokarty-ASgBAgICAkTGB~pm7gmmZw?'
+    page_part = 'p='
+    query_part = '&q=rtx'
 
     real_total_pages = get_total_pages(get_html(url))
-    print('Страниц с объявлениями', real_total_pages)
+    print(f'Страниц с объявлениями {real_total_pages}')
     
     real_total_ads = 0
     for i in range(1, real_total_pages + 1):
         time.sleep(random.randint(5, 15))
-        url_gen = base_url + str(i)
+        url_gen = base_url + query_part + str(i) + query_part
         html = get_html(url_gen)
         real_total_ads += len(get_page_data(html))
-    print('Всего объявлений', real_total_ads)
+        print(f'На странице {i} количество объявлений равно {len(get_page_data(html))}.')
+    print(f'Всего объявлений {real_total_ads}')
 
 
 if __name__ == '__main__':
