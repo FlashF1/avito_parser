@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import random
+import re
 
 
 def get_html(url):
@@ -19,7 +20,7 @@ def get_total_pages(html):
 
 def get_page_data(html):
     soup = BeautifulSoup(html, 'lxml')
-    ads = soup.find('div', elementtiming='bx.catalog.container').find_all('div', class_='js-catalog-item-enum')
+    ads = soup.find('div', elementtiming='bx.catalog.container').find_all(class_=re.compile('iva-item-root'))
     return ads
 
 
