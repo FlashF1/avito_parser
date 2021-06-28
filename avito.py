@@ -12,6 +12,8 @@ def get_html(url):
 
 
 def get_total_pages(html):
+    ''' Подсчет количества страниц для данной категории. 
+    '''
     soup = BeautifulSoup(html, 'lxml')
     pages = soup.find('div', class_='js-pages').find_all('span')[-2].get('data-marker')
     total_pages = int(pages[5:-1])
@@ -19,6 +21,10 @@ def get_total_pages(html):
 
 
 def get_page_data(html):
+    ''' Отфильтровываем рекламные и тд объявления.
+    На выходе получаем элемент супа с актуальными 
+    объявлениями на странице для последующей итерации.
+    '''
     soup = BeautifulSoup(html, 'lxml')
     ads = soup.find('div', elementtiming='bx.catalog.container').find_all(class_=re.compile('iva-item-root'))
     return ads

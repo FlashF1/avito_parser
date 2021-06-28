@@ -10,16 +10,16 @@ base_url = 'https://www.avito.ru/moskva/tovary_dlya_kompyutera/komplektuyuschie/
 page_part = 'p='
 query_part = '&q=rtx'
 
-# получаем общее количество страниц с этими объявлениями
+# Получаем общее количество страниц с этими объявлениями.
 real_total_pages = avito.get_total_pages(avito.get_html(url))
 print(f'Обработано {real_total_pages} страниц с объявлениями.')
     
-# идем в цикле по каждой странице 
+# Идем в цикле по каждой странице. 
 for i in range(1, real_total_pages + 1): 
     time.sleep(random.randint(5, 15))
     url_gen = base_url + query_part + str(i) + query_part
 
-    # получаем список со всеми объявлениями на странице
+    # Получаем список со всеми объявлениями на странице.
     ads = avito.get_page_data(avito.get_html(url_gen)) 
 
     for ad in ads:
@@ -36,7 +36,7 @@ for i in range(1, real_total_pages + 1):
         except:
             price = ''   
 
-        # пишем в файл ссылку на объявление, его название и цену
+        # Пишем в файл ссылку на объявление, его название и цену.
         file_name = str(datetime.now().date()) + '.txt'
         with open(file_name, 'a', encoding='utf-8') as f:
             f.write('https://www.avito.ru' + url_item + '\n')
